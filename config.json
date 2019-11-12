@@ -1,0 +1,13 @@
+{
+    "mainHTML": "index.html",
+    "mainElementName": "--navigation-ui--",
+    "loadDistance": -1,
+    "params": [
+        {
+            "param": "destinationReachedThreshold",
+            "label": "Destination reached threshold",
+            "type": "Number",
+            "value": 1
+        }
+    ]
+}

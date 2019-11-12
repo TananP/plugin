@@ -1,0 +1,287 @@
+<!-- this id has to be the same as "mainElementName" in config.json and the "is" property in index.ts -->
+<dom-module id="--navigation-ui--">
+    <style>
+        :host {
+            /*height: 100%;*/
+            /*width: 100%;*/
+            width: 70%;
+            height: 20vh;
+            font-size: 14px;
+        }
+
+        /* Currently .css files are not supported. Copy & paste styles which are used in more than one html file. */
+        @media (min-device-width: 1200px) {
+        :host {
+                font-size: 20px;
+            }
+        }
+
+        @media (min-device-width: 1000px) {
+            :host {
+                font-size: 18px;
+            }
+        }
+
+        :host button {
+            font-size: 1.2em;
+            border-radius: 0px;
+            background: #00e200;
+            border: 1px solid #afafaf;
+            padding: 10px;
+            color: #fff;
+            font-weight: bold;
+            pointer-events: all;
+            cursor: pointer;
+            z-index: 99;
+        }
+
+        :host button:disabled {
+            border: 1px solid #999999;
+            background-color: #cccccc;
+            color: #666666;
+        }
+
+        :host #elementContainer {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+        }
+
+        :host #showDestinationChooserButton, :host #cancelNavigationButton{
+            position: absolute;
+            z-index: 1;
+            /*right: 25px;*/
+            /*top: 25px;*/
+            right: 3vw;
+            top: 5vh;
+        }
+
+        :host .toastMessage {
+            position: absolute;
+            bottom: 40%;
+            left: 50%;
+            font-size: 1em;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity ease 1s;
+            transform: translate(-50%, -50%);
+        }
+
+        :host #destinationChooser {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 100;
+        }
+
+        :host #languageChooser {
+            position: absolute;
+            font-size: 1.2em;
+            right: 20px;
+            top: 20px;
+            z-index: 99;
+            pointer-events: all;
+        }
+
+        :host .distance-to-destination-container {
+            position: absolute;
+            bottom: 0px;
+            width: 100%;
+            height: 30px;
+            padding: 15px;
+            text-align: center;
+            background: rgba(255,255,255,0.85);
+            box-shadow: 0px 5px 30px #d0cccc;
+        }
+        /* Custom section*/
+        .menu {
+            display: -webkit-flex; /* Safari */
+            display: flex;
+            background-color: #999999;
+            width: 100%;
+            position: absolute;
+            z-index: 0;
+            bottom: 0;
+            left: 0;
+        }
+        :host .menu {
+            display: -webkit-flex; /* Safari */
+            display: flex;
+            background-color: #999999;
+            width: 100%;
+            position: absolute;
+            z-index: 0;
+            bottom: 0;
+            left: 0;
+        }
+        .col {
+            flex: 1;
+            font-size: 1.5em;
+            border: 1px solid black;
+        }
+        .pop-up-position {
+            display: none; /* Hidden by default */
+            /*position: absolute; !* Stay in place *!*/
+            z-index: 2; /* Sit on top */
+            padding-top: 20vh; /* Location of the box */
+            /*left: 0;*/
+            /*top: 0;*/
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            /*padding-bottom: 50vh;*/
+            /*padding-bottom: 50vh;*/
+            overflow: auto; /* Enable scroll if needed */
+        }
+        /*.pop-up-area{*/
+            /*!*background-color: #2234e2;*!*/
+            /*overflow: auto; !* Enable scroll *!*/
+            /*!*width: 70%;*!*/
+        /*}*/
+        /*.pop-up-item {*/
+            /*background-color: #cecece;*/
+            /*position: absolute;*/
+            /*overflow: auto; !* Enable scroll *!*/
+        /*}*/
+        /*:host #popUp {*/
+            /*background-color: #cecece;*/
+            /*overflow: auto; !* Enable scroll if needed *!*/
+            /*flex: 1;*/
+            /*z-index: 100;*/
+            /*height: 5vh;*/
+        /*}*/
+        /*:host .pop-up-position {*/
+            /*display: none; !* Hidden by default *!*/
+            /*!*position: absolute; !* Stay in place *!*!*/
+            /*z-index: 3; !* Sit on top *!*/
+            /*!*padding-top: 20vh; !* Location of the box *!*!*/
+            /*!*left: 25%;*!*/
+            /*top: 10vh;*/
+            /*!*width: 100%; !* Full width *!*!*/
+            /*!*height: 100%; !* Full height *!*!*/
+            /*width: 70%;*/
+            /*height: 20vh;*/
+            /*!*overflow: auto; !* Enable scroll if needed *!*!*/
+            /*!*flex: 1;*!*/
+            /*background-color: #3034ce;*/
+
+        /*}*/
+        /*:host .pop-up-item {*/
+            /*background-color: #3034ce;*/
+            /*cursor: pointer;*/
+            /*!*height: 50vh;*!*/
+            /*!*width: 70%;*!*/
+            /*overflow: auto; !* Enable scroll *!*/
+        /*}*/
+        .close-button{
+            color: black;
+            font-size: 2rem;
+        }
+    </style>
+    <!-- put your GUI elements here -->
+
+
+    <!--<div id="popUp" class="pop-up-position" align="center">-->
+        <!--<button onclick="closePopUp()" class="close-button">&times;</button>-->
+        <!--<test-test popUp="tank"></test-test>-->
+    <!--</div>-->
+    <!--<div class="menu" align="center">-->
+        <!--<button class="col" onclick="openPopUp('tank')">-->
+            <!--<p>Tank</p>-->
+        <!--</button>-->
+        <!--<button class="col" onclick="openPopUp('valve')">-->
+            <!--<p>Valve</p>-->
+        <!--</button>-->
+        <!--<button class="col" onclick="openPopUp('summary')">-->
+            <!--<p>Summary</p>-->
+        <!--</button>-->
+    <!--</div>-->
+
+    <template>
+        <div id="elementContainer">
+            <!-- bind the visibility of html-elements to a polymer property -->
+            <template is="dom-if" if={{!navigating}}>
+                <template is="dom-if" if={{!showDestinationChooser}}>
+                    <!-- the callback is wired via the "on-" polymer convention. The value will be computed by calling the translate method in index.ts and triggered
+                             everytime the translationTrigger Polymer property changes (which is changed by us in onLanguageChanged everytime the language is changed). -->
+                    <button id="showDestinationChooserButton" on-click="onOpenNavigationButtonClick">{{translate(translationTrigger, "openNavigationMenu")}}</button>
+                </template>
+            </template>
+            <template is="dom-if" if="{{navigating}}">
+                <button id="cancelNavigationButton" on-click="onCancelNavigationButtonClick">{{translate(translationTrigger, "cancelNavigation")}}</button>
+                <div class="distance-to-destination-container">{{translate(translationTrigger, "distanceToDestination_pre")}} {{distanceToDestinationLabel}} {{translate(translationTrigger,
+                    "distanceToDestination_post")}}</div>
+            </template>
+            <div id="successMessage" class="toastMessage" >{{translate(translationTrigger, "destinationReached")}}</div>
+            <div id="destinationErrorMessage" class="toastMessage">{{translate(translationTrigger, "destinationError")}}</div>
+            <!-- The destinationChooser Polymer object we created in this project. We assign values to the properties the DestinationChooser provides. Note, the naming conventions,
+                 camel/pascalCase words have to be written with '-' in the html document.
+                 When using the 'on-' prefix, Polymer will assume, in opposite to standard html, that the callbacks exist in the scope of the PolymerElement, in our case
+                 this means that onStartNavigation and onDestinationChooserCancelClick have to exist in the NavigationUIPlugin. -->
+            <template is="dom-if" if={{showDestinationChooser}}>
+                <!-- Notice the postfix at the end of the tag name. Here our placeholder system is used to create a unique tag name,
+                    just like we did with the main element (the entry element in index.ts / index.html). Before the upload, the name is
+                    replaced by a unique one, to avoid name collisions with other plugins. In destination-chooser.html / destination-chooser.ts
+                    the same prefix is used to register the custom element to polymer. You can use any placeholder you like. It just has to match
+                    the one used for registering the element. We recommend using the same as for your main element with a prefix (like destination-chooser_).
+                    Keep in mind, that custom elements need to contain a dash "-" in their name. -->
+                <destination-chooser_--navigation-ui-- id="destinationChooser"
+                 destinations={{destinations}}
+                 success-label="{{translate(translationTrigger, 'startNavigation')}}"
+                 cancel-label="{{translate(translationTrigger, 'cancelNavigation')}}"
+                 choose-destination-label="{{translate(translationTrigger, 'chooseDestination')}}"
+                 on-destination-chooser-start-click="onDestinationChooserStartClick"
+                 on-destination-chooser-cancel-click="onDestinationChooserCancelClick">
+                </destination-chooser_--navigation-ui-->
+
+            </template>
+
+            <div id="popUp" class="pop-up-position" align="center">
+                <button onclick="closePopUp()" class="close-button">&times;</button>
+                <test-test></test-test>
+            </div>
+            <div class="menu" align="center">
+                <button class="col" onclick="openPopUp('tank')">
+                    <p>Tank</p>
+                </button>
+                <button class="col" onclick="openPopUp('valve')">
+                    <p>Valve</p>
+                </button>
+                <button class="col" onclick="openPopUp('summary')">
+                    <p>Summary</p>
+                </button>
+            </div>
+        </div>
+
+    </template>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-firestore.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyDUvOC0f_nodaNfjCemCPiOVo95wHPYzpM",
+            authDomain: "test-bangchak-05-08-2019.firebaseapp.com",
+            databaseURL: "https://test-bangchak-05-08-2019.firebaseio.com",
+            projectId: "test-bangchak-05-08-2019",
+            storageBucket: "test-bangchak-05-08-2019.appspot.com",
+            messagingSenderId: "602162742261",
+            appId: "1:602162742261:web:1a1da1861f035cc2"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <!-- reference your (webpack built) bundle here -->
+    <script src="build/navigation-ui-bundle.js"></script>
+    <script src="build/main-function.js"></script>
+
+
+</dom-module>

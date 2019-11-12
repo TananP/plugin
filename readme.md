@@ -1,0 +1,8 @@
+## Navigation-ui example plugin
+This sample plugin demonstrates how a simple navigation user interface can be realized by implementing a PluginElement. The navigation-ui plugin interacts with the Building- and the NavigationModule. It allows the user to start a navigation by choosing an available destination from a list. It is written in TypeScript and uses webpack to create a javascript bundle.
+
+## Build and Run the plugin
+Run `npm install` once, then you can create the javascript bundle by running `npm run build`. Preview the plugin with the plugin tool by running `insplugin preview` and view the plugin by selecting "Preview" in the INS Admin Interface (see the Plugin API documentation for detailed usage of the insplugin tool). Note, that you will not be able to do a navigation in the preview, since the necessary modules are not available in the preview callback (this is also explained in the plugin documentation in more detail). Also, there will be no navigation routes visible unless you deployed a template to your server which takes care of route visualisation (since this is not possible in preview, you will not see any routes there neither).
+
+### Webpack
+For transpiling and bundling of the source files, webpack is used. If you want to adapt this sample plugin for your own implementation, you should rename the "filename" property in webpack-config.js. The rest of the script can be left unchanged, unless you also rename your plugin entry file (in this plugin "index.ts"), which is referenced in "entry".

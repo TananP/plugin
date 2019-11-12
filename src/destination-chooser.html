@@ -1,0 +1,122 @@
+<!-- The id has to be the same as in the "is" property of the DestiantionChooser class. 
+     Use the same identifier as postfix as in your PluginElement, in this case '--navigation-ui--' -->
+<dom-module id="destination-chooser_--navigation-ui--">
+    <style>
+        :host {
+            padding: 15px;
+            pointer-events: all;
+            /*width: 100%;*/
+            /*height: 100%;*/
+            width: 70%;
+            height: 20vh;
+            box-sizing: border-box;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            font-size: 14px;
+        }
+
+        /* Currently .css files are not supported. Copy & paste styles which are used in more than one html file. */
+        @media (min-device-width: 1200px) {
+        :host {
+                font-size: 20px;
+            }
+        }
+
+        @media (min-device-width: 1000px) {
+            :host {
+                font-size: 18px;
+            }
+        }
+
+        :host button {
+            font-size: 1.2em;
+            border-radius: 0px;
+            background: #000000;
+            border: 1px solid #afafaf;
+            padding: 10px;
+            color: #fff;
+            font-weight: bold;
+            pointer-events: all;
+            cursor: pointer;
+            z-index: 99;
+        }
+
+        :host button:disabled {
+            border: 1px solid #999999;
+            background-color: #cccccc;
+            color: #666666;
+        }
+
+        :host #header {
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            padding: 15px;
+            box-sizing: border-box;
+            text-align: center;
+            font-size: 1.6em;
+        }
+
+        :host #destinationsContainer {
+            flex: 1;
+            overflow: auto;
+        }
+
+        :host #footer {
+            padding-top: 10px;
+            text-align: center;
+        }
+
+        :host .destination-row {
+            padding: 10px;
+            border-bottom: 1px solid #bfbfbf;
+            cursor: pointer;
+        }
+
+        :host .destination-row:hover {
+            background-color: azure;
+        }
+
+        :host .destination-row-selected {
+            background-color: rgb(133, 175, 231);
+            color: #fff;
+        }
+
+        :host .destination-row-selected:hover {
+            background-color: rgb(133, 175, 231);
+        }
+
+        :host .empty-list-container {
+            margin-top: 20px;
+            flex: 1;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+    <template>
+        <div id="header">
+            {{chooseDestinationLabel}}
+        </div>
+        <div id="destinationsContainer">
+            <template is="dom-repeat" items={{destinations}} sort="sortDestination">
+                <div class="destination-row" item={{item}} on-click="onDestinationRowClick">
+                    {{item.name}}
+                </div>
+            </template>
+            <template is="dom-if" if="{{!destinations.length}}">
+                <div class="empty-list-container">
+                    Nothing to select
+                </div>
+            </template>
+        </div>
+        <div id="footer">
+            <!-- we register to the button clicks and dispatch custom html events in our callbacks to which the PluginElement is wired (see index.html) -->
+            <button on-click="onCancelClicked">{{cancelLabel}}</button>
+            <button id="startNavigationButton" disabled="true" on-click="onStartClicked">{{successLabel}}</button>
+        </div>
+    </template>
+    <!-- include your typescript source file here, so webpack can take care of the transpiling and bundeling. 
+         NOTE: index.html, in opposite to this file, is not touched by webpack and therefore references the webpack js bundle, and not the ts file. -->
+    <script src="./destination-chooser.ts"></script>
+</dom-module>

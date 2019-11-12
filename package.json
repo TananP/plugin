@@ -1,0 +1,16 @@
+{
+  "name": "navigation-ui",
+  "version": "1.0.0",
+  "main": "ui.html",
+  "devDependencies": {
+    "polymer-webpack-loader": "^2.0.2",
+    "ts-loader": "^3.5.0",
+    "typescript": "^2.7.2",
+    "webpack": "^3.11.0"
+  },
+  "scripts": {
+    "build": "webpack"
+  },
+  "author": "",
+  "license": "Copyright 2018 Insider Navigation"
+}
