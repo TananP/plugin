@@ -6,7 +6,7 @@
     "polymer-webpack-loader": "^2.0.2",
     "ts-loader": "^3.5.0",
     "typescript": "^2.7.2",
-    "webpack": "^3.11.0"
+    "webpack": "^5.75.0"
   },
   "scripts": {
     "build": "webpack"
